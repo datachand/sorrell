@@ -1,0 +1,80 @@
+<html ng-app="thinhelp">
+    <head>
+        <meta charset="utf-8">
+        <title>Sorrell</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.1/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.1/angular-resource.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.1/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.1/angular-animate.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.0/ui-bootstrap-tpls.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+    </head>
+    <body>
+        <div class="container" ng-controller="widgetController">
+            <helpbox></helpbox>   
+            <div class="row coupon-holder">
+                <div class="col-md-6"  ng-repeat="d in dataSet">
+                    <div class="panel panel-default coupon coupon-{{d.name | lowercase}}" id="coupon-{{d.name | lowercase}}">
+                        <div class="panel-heading" id="head">
+                            <div class="panel-title" id="title">
+                                <span class="hidden-xs">{{d.name}}</span>
+                                <span class="visible-xs">{{d.name}}</span>
+                                <span class="pull-right" uib-dropdown on-toggle="toggled(open)">
+                                    <a href id="simple-dropdown" uib-dropdown-toggle>
+                                        <i class="glyphicon glyphicon-option-vertical"></i>
+                                    </a>
+                                    <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
+                                        <li role="menuitem">
+                                            <thin-help context="{{ d.name }}"></thin-help>
+                                        </li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <img src="http://placehold.it/700x450" class="coupon-img img-rounded">
+                        </div>
+                        <div class="panel-footer">
+                            <!-- <div class="coupon-code">
+                                Code: GBWO2
+                                <span class="print">
+                                <a href="#" class="btn btn-link"><i class="fa fa-lg fa-print"></i> Print Coupon</a>
+                                </span>
+                            </div>
+                            <div class="exp">Expires: Sep 30, 2016</div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                       
+                </div>
+            </div>  
+            <div class="overlay"></div>     
+            <script type="text/ng-template" id="thinhelp.html">
+                <a href="javascript:void(0)" ng-click="openhelp(context)">Help {{ context }}</a>
+
+            </script>
+            <script type="text/ng-template" id="helpbox.html">
+                    
+                <div class="helpbox">
+                    <div class="pull-right">
+                        <i class="glyphicon glyphicon-remove" ng-click="close()"></i>
+                    </div>
+                    <p class="helpbox-content"></p>
+                </div>
+            </script>
+            <script type="text/ng-template" id="modal-content.html">
+                 
+                <div class="modal-body" ng-bind-html="context">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+                </div>
+             </script>
+        </div>   
+    </body>
+</html>
